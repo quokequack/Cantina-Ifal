@@ -51,9 +51,9 @@ public class Main{
                 int opcaoEscolhida3 = opcao3.nextInt();
 
                 if(opcaoEscolhida3 == 1){
-                    System.out.println(lucroProdutos);
+                    System.out.println(Estoque.lucroProdutos);
                 }else if(opcaoEscolhida3 == 2){
-                    System.out.println(prejuizoProdutos);
+                    System.out.println(Estoque.prejuizoProdutos);
                 }
             }else if(opcaoEscolhida == 4){
                 darBaixa();
