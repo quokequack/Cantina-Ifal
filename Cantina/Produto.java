@@ -1,5 +1,8 @@
 package JAVA.CANTINA;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 
 class Produto{
     private String nome;
@@ -10,8 +13,6 @@ class Produto{
     private int quantidadeVendida;
     private int quantidadeDisponivel;
 
-    ArrayList<Produto> estoque = new ArrayList<>();
-    ArrayList<Produto> estoquePequeno = new ArrayList<>();
     ArrayList<Double> prejuizoProdutos = new ArrayList<>();
     ArrayList<Double> lucroProdutos = new ArrayList<>();
 
@@ -28,11 +29,11 @@ class Produto{
             this.precoDeCompra = precoDeCompra;
             this.precoDeVenda = precoDeVenda;
             this.quantidadeComprada = quantidadeComprada;
-
-            estoque.add(this);
+            Estoque.estoque.add(this);
             if (quantidadeComprada <= 50){
-                estoquePequeno.add(this);
-        }   }
+                Estoque.estoquePequeno.add(this);
+            }
+        }
     }
     public void setPrecoDeVenda(double precoNovo){
         this.precoDeVenda = precoNovo;
@@ -45,6 +46,12 @@ class Produto{
     }
     public int getQuantidade(){
         return this.quantidadeDisponivel;
+    }
+    public int getQuantidadeDisponivel(){
+        return this.quantidadeDisponivel;
+    }
+    public String getDescricao(){
+        return this.descricao;
     }
     
     //método que calcula o lucro ou prejuízo por produto vendido
@@ -61,20 +68,12 @@ class Produto{
         if (quantidadeVendida <= 0){
             throw new QuantidadeInvalidaException("Quantidade vendida não pode ser menor ou igual a 0!!!");
         }else{
-            this.quantidadeDisponivel -= quantidadeVendida;
+            quantidadeDisponivel -= quantidadeVendida;
             int novaQuantidade = quantidadeDisponivel - quantidadeVendida;
-            if(this.quantidadeDisponivel < 50 && estoquePequeno.contains(this) == false){
-                estoquePequeno.add(this);
+            if(quantidadeDisponivel < 50 && Estoque.estoquePequeno.contains(this) == false){
+                Estoque.estoquePequeno.add(this);
             }
-          calculaLucroEPrejuizo();
+            calculaLucroEPrejuizo();
         }
-    }
-    //exibe os produtos por nome e quantidade
-    public void produtosPorQuantidade(){
-        System.out.println(estoque);
-    }
-    //exibe os produtos por nome e descricao
-    public void produtosPorDescricao(){
-
     }
 }
