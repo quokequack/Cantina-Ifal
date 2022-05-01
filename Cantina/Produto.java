@@ -1,6 +1,7 @@
-import java.util.Comparable;
+package JAVA.CANTINA;
+import java.util.ArrayList;
 
-class Produto implements Comparable{
+class Produto{
     private String nome;
     private String descricao;
     private double precoDeCompra;
@@ -8,6 +9,11 @@ class Produto implements Comparable{
     private int quantidadeComprada;
     private int quantidadeVendida;
     private int quantidadeDisponivel;
+
+    ArrayList<Produto> estoque = new ArrayList<>();
+    ArrayList<Produto> estoquePequeno = new ArrayList<>();
+    ArrayList<Double> prejuizoProdutos = new ArrayList<>();
+    ArrayList<Double> lucroProdutos = new ArrayList<>();
 
     public Produto(String nome, String descricao, double precoDeCompra, double precoDeVenda, int quantidadeComprada) throws PrecoInvalidoException, QuantidadeInvalidaException{
         if (precoDeVenda <= precoDeCompra){
@@ -18,14 +24,15 @@ class Produto implements Comparable{
             throw new QuantidadeInvalidaException("Quantidade não pode ser igual ou menor a 0!!!");
         }else{
             this.nome = nome;
-            this.desc = desc;
+            this.descricao = descricao;
             this.precoDeCompra = precoDeCompra;
             this.precoDeVenda = precoDeVenda;
             this.quantidadeComprada = quantidadeComprada;
-            produtosEmEstoque.add(this);
+
+            estoque.add(this);
             if (quantidadeComprada <= 50){
-                produtosEstoquePequeno.add(this);
-        }
+                estoquePequeno.add(this);
+        }   }
     }
     public void setPrecoDeVenda(double precoNovo){
         this.precoDeVenda = precoNovo;
@@ -41,16 +48,34 @@ class Produto implements Comparable{
     }
     
     //método que calcula o lucro ou prejuízo por produto vendido
-    public void CalculaLucroEPrejuizo(){
+    public void calculaLucroEPrejuizo(){
         double lucro = this.precoDeVenda - this.precoDeCompra;
         if (lucro == this.quantidadeComprada || lucro == 0){
-            prejuizoProduto.put(this.nome lucro)
+            prejuizoProdutos.add(lucro);
         }else{
-            lucroProduto.put(this.nome, lucro);
+            lucroProdutos.add(lucro);
         }
     }
-    //método que ordena a arraylist
-    public void CompareTo(Produto outro){
-        if (this.nome)
+    //método que dá baixa em um produto vendido e chama o método calculaLucro, uma vez que se dado baixa, significa que um produto foi vendido
+    public void darBaixa(int quantidadeVendida) throws QuantidadeInvalidaException{
+        if (quantidadeVendida <= 0){
+            throw new QuantidadeInvalidaException("Quantidade vendida não pode ser menor ou igual a 0!!!");
+        }else{
+            this.quantidadeDisponivel -= quantidadeVendida;
+            int novaQuantidade = quantidadeDisponivel - quantidadeVendida;
+            if(this.quantidadeDisponivel < 50 && estoquePequeno.contains(this) == false){
+            estoquePequeno.add(this);
+        }
+    }
+
+        calculaLucroEPrejuizo();
+    }
+    //exibe os produtos por nome e quantidade
+    public void produtosPorQuantidade(){
+        System.out.println(estoque);
+    }
+    //exibe os produtos por nome e descricao
+    public void produtosPorDescricao(){
+
     }
 }
