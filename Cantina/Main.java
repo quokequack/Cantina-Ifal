@@ -41,7 +41,10 @@ public class Main{
                 if (opcaoEscolhida2 == 1){
                     produtosPorDescricao();
                 }else if(opcaoEscolhida2 == 2){
-                    produtosPorQuantidade();
+                        System.out.println(estoqueCantina);
+                        for(Produto quantidade: Estoque.estoque){
+                            System.out.println(quantidade.getQuantidadeDisponivel());
+                        }
                 }else if(opcaoEscolhida2 == 3){
                     System.out.println();
                 }
