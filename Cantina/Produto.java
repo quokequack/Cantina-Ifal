@@ -64,11 +64,10 @@ class Produto{
             this.quantidadeDisponivel -= quantidadeVendida;
             int novaQuantidade = quantidadeDisponivel - quantidadeVendida;
             if(this.quantidadeDisponivel < 50 && estoquePequeno.contains(this) == false){
-            estoquePequeno.add(this);
+                estoquePequeno.add(this);
+            }
+          calculaLucroEPrejuizo();
         }
-    }
-
-        calculaLucroEPrejuizo();
     }
     //exibe os produtos por nome e quantidade
     public void produtosPorQuantidade(){
