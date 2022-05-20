@@ -11,10 +11,10 @@ class Produto{
     private double precoDeVenda;
     private int quantidadeComprada;
     private int quantidadeVendida;
-    private int quantidadeDisponivel;
+    private static int quantidadeDisponivel;
 
-    ArrayList<Double> prejuizoProdutos = new ArrayList<>();
-    ArrayList<Double> lucroProdutos = new ArrayList<>();
+    static ArrayList<Double> prejuizoProdutos = new ArrayList<>();
+    static ArrayList<Double> lucroProdutos = new ArrayList<>();
 
     public Produto(String nome, String descricao, double precoDeCompra, double precoDeVenda, int quantidadeComprada) throws PrecoInvalidoException, QuantidadeInvalidaException{
         if (precoDeVenda <= precoDeCompra){
@@ -35,6 +35,12 @@ class Produto{
             }
         }
     }
+    public double getPrecoDeVenda(){
+        return this.precoDeVenda;
+    }
+    public double getPrecoDeCompra(){
+        return this.precoDeCompra;
+    }
     public void setPrecoDeVenda(double precoNovo){
         this.precoDeVenda = precoNovo;
     }
@@ -52,28 +58,5 @@ class Produto{
     }
     public String getDescricao(){
         return this.descricao;
-    }
-    
-    //método que calcula o lucro ou prejuízo por produto vendido
-    public void calculaLucroEPrejuizo(){
-        double lucro = this.precoDeVenda - this.precoDeCompra;
-        if (lucro == this.quantidadeComprada || lucro == 0){
-            prejuizoProdutos.add(lucro);
-        }else{
-            lucroProdutos.add(lucro);
-        }
-    }
-    //método que dá baixa em um produto vendido e chama o método calculaLucro, uma vez que se dado baixa, significa que um produto foi vendido
-    public void darBaixa(int quantidadeVendida) throws QuantidadeInvalidaException{
-        if (quantidadeVendida <= 0){
-            throw new QuantidadeInvalidaException("Quantidade vendida não pode ser menor ou igual a 0!!!");
-        }else{
-            quantidadeDisponivel -= quantidadeVendida;
-            int novaQuantidade = quantidadeDisponivel - quantidadeVendida;
-            if(quantidadeDisponivel < 50 && Estoque.estoquePequeno.contains(this) == false){
-                Estoque.estoquePequeno.add(this);
-            }
-            calculaLucroEPrejuizo();
-        }
     }
 }
