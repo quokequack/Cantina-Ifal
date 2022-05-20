@@ -1,10 +1,11 @@
-package JAVA.CANTINA;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 
 class Produto{
+    private int codigo_produto;
     private String nome;
     private String descricao;
     private double precoDeCompra;
@@ -16,7 +17,7 @@ class Produto{
     static ArrayList<Double> prejuizoProdutos = new ArrayList<>();
     static ArrayList<Double> lucroProdutos = new ArrayList<>();
 
-    public Produto(String nome, String descricao, double precoDeCompra, double precoDeVenda, int quantidadeComprada) throws PrecoInvalidoException, QuantidadeInvalidaException{
+    public Produto(int codigo_produto, String nome, String descricao, double precoDeCompra, double precoDeVenda, int quantidadeComprada) throws PrecoInvalidoException, QuantidadeInvalidaException{
         if (precoDeVenda <= precoDeCompra){
             throw new PrecoInvalidoException("Preço de venda não pode ser igual ou menor do que o preço de compra!!!");
         }else if(precoDeCompra == 0 || precoDeVenda == 0){
@@ -24,6 +25,7 @@ class Produto{
         }else if(quantidadeComprada <= 0){
             throw new QuantidadeInvalidaException("Quantidade não pode ser igual ou menor a 0!!!");
         }else{
+            this.codigo_produto = codigo_produto;
             this.nome = nome;
             this.descricao = descricao;
             this.precoDeCompra = precoDeCompra;
@@ -34,6 +36,9 @@ class Produto{
                 Estoque.estoquePequeno.add(this);
             }
         }
+    }
+    public int getCodigoProduto(){
+        return this.codigo_produto;
     }
     public double getPrecoDeVenda(){
         return this.precoDeVenda;
