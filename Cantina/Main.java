@@ -1,4 +1,4 @@
-package JAVA.CANTINA;
+
 import java.util.Scanner;
 
 public class Main{
@@ -7,11 +7,11 @@ public class Main{
         Estoque estoqueCantina = new Estoque();
         
         //produtos básicos do estoque
-        Produto suco = new Produto("Suco de Laranja", "500Ml", 2.82, 6.00,200);
-        Produto pipoca = new Produto("Pipoca Cheetos", "Sabor: queijo", 1.00, 2.00, 500);
-        Produto cha = new Produto("Chá Gelado", "Sabor: Limão", 2.30, 5.00, 150);
-        Produto torta = new Produto("Torta", "Salgada", 3.00, 6.00, 4);
-        Produto refrigerante = new Produto("Refrigerante", "Guaraná 100Ml", 1.80, 3.50, 100);
+        Produto suco = new Produto(001,"Suco de Laranja", "500Ml", 2.82, 6.00,200);
+        Produto pipoca = new Produto(002,"Pipoca Cheetos", "Sabor: queijo", 1.00, 2.00, 500);
+        Produto cha = new Produto(003,"Chá Gelado", "Sabor: Limão", 2.30, 5.00, 150);
+        Produto torta = new Produto(004,"Torta", "Salgada", 3.00, 6.00, 4);
+        Produto refrigerante = new Produto(005,"Refrigerante", "Guaraná 100Ml", 1.80, 3.50, 100);
         //menu da cantina
         System.out.println("\n === Cantina Do Ifal ===\nO que deseja fazer?\n1 - Cadastrar produtos;\n2 - Ver produtos em estoque;\n3 - Ver relatório de lucro e prejuízo;\n4 - Dar baixa no estoque\n5 - Sair.");
         Scanner escolha = new Scanner(System.in);
@@ -63,7 +63,9 @@ public class Main{
                 System.out.println("Quantos você quer dar baixa? ");
                 Scanner quantidade = new Scanner(System.in);
                 int quantidadeBaixa = quantidade.nextInt();
-                estoqueCantina.darBaixa(quantidadeBaixa, );
+                estoqueCantina.darBaixa(quantidadeBaixa,  );
+                //problema: preciso dar um jeito de tirar um objeto da lista passado como parâmetro;
+                //problema: preciso criar o método ...
             }else if(opcaoEscolhida == 5){
                 System.out.println("Até a próxima!");
             }
