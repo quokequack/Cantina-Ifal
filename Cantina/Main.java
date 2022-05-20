@@ -5,6 +5,7 @@ public class Main{
     public static void main(String args[]){
         //abre um novo estoque
         Estoque estoqueCantina = new Estoque();
+        
         //produtos básicos do estoque
         Produto suco = new Produto("Suco de Laranja", "500Ml", 2.82, 6.00,200);
         Produto pipoca = new Produto("Pipoca Cheetos", "Sabor: queijo", 1.00, 2.00, 500);
@@ -39,14 +40,11 @@ public class Main{
                 Scanner opcao2 = new Scanner(System.in);
                 int opcaoEscolhida2 = opcao2.nextInt();
                 if (opcaoEscolhida2 == 1){
-                    produtosPorDescricao();
+                    estoqueCantina.produtosPorDescricao();
                 }else if(opcaoEscolhida2 == 2){
-                        System.out.println(estoqueCantina);
-                        for(Produto quantidade: Estoque.estoque){
-                            System.out.println(quantidade.getQuantidadeDisponivel());
-                        }
+                    estoqueCantina.produtosPorQuantidade();
                 }else if(opcaoEscolhida2 == 3){
-                    System.out.println();
+                    System.out.println(estoqueCantina.estoquePequeno);
                 }
             }else if(opcaoEscolhida == 3){
                 System.out.println("Deseja ver:\n 1 - Relatório de lucratividade;\n 2 - Relatório de prejuízo.");
@@ -54,12 +52,18 @@ public class Main{
                 int opcaoEscolhida3 = opcao3.nextInt();
 
                 if(opcaoEscolhida3 == 1){
-                    System.out.println(Estoque.lucroProdutos);
+                    System.out.println(estoqueCantina.lucroProdutos);
                 }else if(opcaoEscolhida3 == 2){
-                    System.out.println(Estoque.prejuizoProdutos);
+                    System.out.println(estoqueCantina.prejuizoProdutos);
                 }
             }else if(opcaoEscolhida == 4){
-                darBaixa();
+                System.out.println("Qual produto deseja dar baixa?");
+                Scanner produtoBaixa = new Scanner(System.in);
+                String produtoParaBaixa = produtoBaixa.nextLine();
+                System.out.println("Quantos você quer dar baixa? ");
+                Scanner quantidade = new Scanner(System.in);
+                int quantidadeBaixa = quantidade.nextInt();
+                estoqueCantina.darBaixa(quantidadeBaixa, );
             }else if(opcaoEscolhida == 5){
                 System.out.println("Até a próxima!");
             }
