@@ -1,5 +1,7 @@
-package JAVA.CANTINA;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Estoque {
@@ -8,43 +10,49 @@ public class Estoque {
     double lucroProdutos;
     double prejuizoProdutos;
 
-    public void cadastraProduto(String nome, String desc, double precoDeCompra, double precoDeVenda, int quantidadeComprada) throws PrecoInvalidoException, QuantidadeInvalidaException {
-        estoque.add(new Produto(nome, desc, precoDeCompra, precoDeVenda, quantidadeComprada));
+    public void cadastraProduto(int codigoProduto, String nome, String desc, double precoDeCompra, double precoDeVenda, int quantidadeComprada) throws PrecoInvalidoException, QuantidadeInvalidaException {
+        estoque.add(new Produto(codigoProduto, nome, desc, precoDeCompra, precoDeVenda, quantidadeComprada));
         System.out.println("Produto cadastrado com sucesso!");
     }
 
     public void produtosPorQuantidade(){
-        System.out.println(estoque);
-        for(Produto quantidade: estoque){
-            System.out.println(quantidade.getQuantidadeDisponivel());
+        System.out.println("=== PRODUTOS POR QUANTIDADE ===");
+        for(Produto produto: estoque){
+            System.out.println(produto.getNome());
+            System.out.println(produto.getQuantidadeDisponivel());
         }
     }
     //exibe os produtos por nome e descricao
     public void produtosPorDescricao(){
-        System.out.println(estoque);
-        for(Produto desc: estoque){
-            System.out.println(desc.getDescricao());
+        System.out.println("=== PRODUTOS POR DESCRIÇÃO ===");
+        for(Produto produto: estoque){
+            System.out.println(produto.getNome());
+            System.out.println(produto.getDescricao());
         }
     }
-    // 3 erros básicos:
-    // 1 - metodo dar baixa n pega string, tenho que arranjar um jeito
-    /* de fazer com que ele 
-    */
+    //exibe os produtos com estoque pequeno
+    public void produtosEstoquePequeno(){
+        for(Produto produto: estoquePequeno){
+            System.out.println(produto.getNome());
+            System.out.println(produto.getQuantidadeDisponivel());
+        }
+    }
     //metodo para dar baixa em produto
-    public void darBaixa(int quantidadeVendida, Produto produto) throws QuantidadeInvalidaException{
-        int quantidadeDisponivelNoProduto = produto.getQuantidadeDisponivel();
-        for(Produto nome: estoque){
-            if(quantidadeVendida <= 0){
-                throw new QuantidadeInvalidaException("Quantidade vendida não pode ser igual ou menor do que 0!!!");
-            }else if(estoque.equals(produto) == false){
-                System.out.println("Esse produto não está no estoque!!!");
-            }else if(quantidadeVendida > quantidadeDisponivelNoProduto){
-                throw new QuantidadeInvalidaException("Quantidade maior do que a disponível!!!");
-            }else{
-                int quantidadeDisponivel = produto.getQuantidadeDisponivel();
-                quantidadeDisponivel -= quantidadeVendida;
-                if(quantidadeDisponivel < 50 && estoquePequeno.equals(produto)){
-                    estoquePequeno.add(produto);
+    public void darBaixa(int quantidadeVendida, String nomeProduto) throws QuantidadeInvalidaException{
+        for(Produto produto: estoque){
+            if(produto.getNome() == nomeProduto){
+                int quantidadeDisponivelNoProduto = produto.getQuantidadeDisponivel();
+                if(quantidadeVendida <= 0){
+                    throw new QuantidadeInvalidaException("Quantidade vendida não pode ser igual ou menor do que 0!!!");
+                }else if(estoque.equals(produto) == false){
+                    System.out.println("Esse produto não está no estoque!!!");
+                }else if(quantidadeVendida > quantidadeDisponivelNoProduto){
+                    throw new QuantidadeInvalidaException("Quantidade maior do que a disponível!!!");
+                }else{
+                    quantidadeDisponivelNoProduto -= quantidadeVendida;
+                    if(quantidadeDisponivelNoProduto < 50 && estoquePequeno.equals(produto)){
+                        estoquePequeno.add(produto);
+                    }
                 }
                 //ele chama o metodo para calcular prejuizo e lucro porque entende-se que uma vez que o produto foi dado baixa, ele foi vendido
                 calculaLucroEPrejuizo(produto);
