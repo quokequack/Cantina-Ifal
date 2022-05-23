@@ -1,9 +1,8 @@
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
+ 
 class Produto{
     private int codigo_produto;
     private String nome;
@@ -31,6 +30,7 @@ class Produto{
             this.precoDeCompra = precoDeCompra;
             this.precoDeVenda = precoDeVenda;
             this.quantidadeComprada = quantidadeComprada;
+            this.quantidadeDisponivel = quantidadeComprada;
             Estoque.estoque.add(this);
             if (quantidadeComprada <= 50){
                 Estoque.estoquePequeno.add(this);
@@ -39,6 +39,9 @@ class Produto{
     }
     public int getCodigoProduto(){
         return this.codigo_produto;
+    }
+    public String getNome(){
+        return this.nome;
     }
     public double getPrecoDeVenda(){
         return this.precoDeVenda;
@@ -58,10 +61,9 @@ class Produto{
     public int getQuantidade(){
         return this.quantidadeDisponivel;
     }
-    public int getQuantidadeDisponivel(){
+    public Integer getQuantidadeDisponivel(){
         return this.quantidadeDisponivel;
     }
     public String getDescricao(){
         return this.descricao;
     }
-}
