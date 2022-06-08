@@ -33,7 +33,8 @@ public class Interface1 extends JFrame{
         
 }
 
-/*import javax.swing.*;
+import javax.swing.*;
+import java.awt.Container;
 
 public class Interface1 extends JFrame{
     private JButton botao;
@@ -42,29 +43,23 @@ public class Interface1 extends JFrame{
     private Container container;
 
     public Interface1(){
-        setSize(300, 140);
-        setTitle("Primeiros passos em Swing");
-        container.getContentPane();
+        setSize(400, 500);
+        setTitle("Primeiros passos em SWING");
+        container = getContentPane();
         container.setLayout(null);
         botao = new JButton("Okay!");
-        lblNome = new JLabel("Nome");
+        lblNome = new JLabel("NOME:");
         txtNome = new JTextField();
         lblNome.setBounds(10, 10, 100, 25);
-        txtNome.setBounds(40, 10, 100, 25);
-        botao.setBounds(70, 10, 100, 25);
+        txtNome.setBounds(50, 10, 100, 25);
+        botao.setBounds(50, 40, 100, 25);
         container.add(lblNome);
         container.add(txtNome);
         container.add(botao);
         setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     public static void main(String args[]){
         Interface1 tela = new Interface1();
     }
-    botao.addActionListener(this);
-        @Override
-        public void actionPerformed(ActionEvent e){
-            if (e.getActionCommand().equals("Enviar")){
-                txtNome.setText("Botão clicado"))
-            }
-        }
-}*/
+}
