@@ -1,4 +1,5 @@
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,8 +12,15 @@ public class Estoque {
     double prejuizoProdutos;
 
     public void cadastraProduto(int codigoProduto, String nome, String desc, double precoDeCompra, double precoDeVenda, int quantidadeComprada) throws PrecoInvalidoException, QuantidadeInvalidaException {
-        estoque.add(new Produto(codigoProduto, nome, desc, precoDeCompra, precoDeVenda, quantidadeComprada));
-        System.out.println("Produto cadastrado com sucesso!");
+        Produto produto = new Produto(codigoProduto, nome, desc, precoDeCompra, precoDeVenda, quantidadeComprada);
+        estoque.add(produto);
+        try{
+            ProdutoDAO prodDAO = new ProdutoDAO();
+            prodDAO.adiciona(produto);
+            System.out.println("Produto cadastrado com sucesso!");
+        }catch(SQLException e){
+            System.out.println("Produto não adicionado. Erro: "+e);
+        }
     }
 
     public void produtosPorQuantidade(){
@@ -50,6 +58,8 @@ public class Estoque {
                     throw new QuantidadeInvalidaException("Quantidade maior do que a disponível!!!");
                 }else{
                     quantidadeDisponivelNoProduto -= quantidadeVendida;
+                    ProdutoDAO prodDao = new ProdutoDAO();
+                    prodDao.atualizaQtdd(produto);                
                     if(quantidadeDisponivelNoProduto < 50 && estoquePequeno.equals(produto)){
                         estoquePequeno.add(produto);
                     }
