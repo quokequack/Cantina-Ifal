@@ -7,7 +7,10 @@ public class FuncionarioDAO {
     private String senha;
 
     public FuncionarioDAO(){
-        this.conexao = new FabricaCon().criaConexao();
+        /*
+        FabricaCon conexao = new FabricaCon();
+        this.conexao = conexao.criaConexao(); */
+        conexao = FabricaCon.criaConexao();
     }
 
     public void adiciona(Funcionario funcionario){
