@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.Container;
-import java.awt.GridLayout;
 import java.awt.event.*;
+import java.sql.*;
 
 public class CadastroGUI extends JFrame implements ActionListener {
     private JLabel lblText;
@@ -19,7 +19,7 @@ public class CadastroGUI extends JFrame implements ActionListener {
 
 
     public CadastroGUI(){
-        setSize(400,400);
+        setSize(400,00);
         setTitle("Cantina IFAL - Cadastro de funcionarios");
         lblText = new JLabel("CADASTRO DE FUNCIONARIOS");
         lblText2 = new JLabel("Cantina IFAL");
@@ -34,7 +34,7 @@ public class CadastroGUI extends JFrame implements ActionListener {
         lblSenha = new JLabel("SENHA:");
         txtSenha = new JTextField();
         cadastrar = new JButton("CADASTRAR");
-        cancelar = new JButton("VOLTAR");
+        cancelar = new JButton("CANCELAR");
         limparTudo = new JButton("LIMPAR");
         lblText.setBounds(110, 0, 200, 25);
         lblText2.setBounds(160, 15, 150,25);
@@ -59,14 +59,33 @@ public class CadastroGUI extends JFrame implements ActionListener {
         container.add(cancelar);
         container.add(limparTudo);
         cadastrar.addActionListener(this);
+        limparTudo.addActionListener(this);
+        cancelar.addActionListener(this);
     }
     public static void main(String args[]){
         CadastroGUI cadastroTeste = new CadastroGUI();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Cadastrar")){
-            
+        if (e.getActionCommand().equals("LIMPAR")){
+            txtLogin.setText("");
+            txtNome.setText("");
+            txtSenha.setText("");
+        }else if (e.getActionCommand().equals("CANCELAR")){
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        }else if(e.getActionCommand().equals("CADASTRAR")){
+            Funcionario funcionarioNovo = new Funcionario();
+            int login = Integer.parseInt(txtLogin.getText());
+            funcionarioNovo.setLogin(login);
+            funcionarioNovo.setUsername(txtNome.getText());
+            funcionarioNovo.setSenha(txtSenha.getText());
+            if ((txtLogin.getText().isEmpty()) || (txtNome.getText().isEmpty()) || (txtSenha.getText().isEmpty())){
+                JOptionPane.showMessageDialog(null, "Preencha os campos!!");
+            }else{
+                FuncionarioDAO fdao = new FuncionarioDAO();
+                fdao.adiciona(funcionarioNovo);
+                JOptionPane.showMessageDialog(null, "Funcionário "+txtNome.getText()+"inserido com sucesso!");
+            }
         }
         
     }
