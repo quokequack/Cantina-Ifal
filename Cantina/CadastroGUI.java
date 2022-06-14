@@ -75,8 +75,8 @@ public class CadastroGUI extends JFrame implements ActionListener {
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }else if(e.getActionCommand().equals("CADASTRAR")){
             Funcionario funcionarioNovo = new Funcionario();
-            int login = Integer.parseInt(txtLogin.getText());
-            funcionarioNovo.setLogin(login);
+            /*int login = Integer.parseInt(txtLogin.getText());*/
+            funcionarioNovo.setLogin(txtLogin.getText());
             funcionarioNovo.setUsername(txtNome.getText());
             funcionarioNovo.setSenha(txtSenha.getText());
             if ((txtLogin.getText().isEmpty()) || (txtNome.getText().isEmpty()) || (txtSenha.getText().isEmpty())){
@@ -84,7 +84,12 @@ public class CadastroGUI extends JFrame implements ActionListener {
             }else{
                 FuncionarioDAO fdao = new FuncionarioDAO();
                 fdao.adiciona(funcionarioNovo);
-                JOptionPane.showMessageDialog(null, "Funcionário "+txtNome.getText()+"inserido com sucesso!");
+                JOptionPane.showMessageDialog(null, "Funcionário "+txtNome.getText()+" inserido com sucesso!");
+                txtLogin.setText("");
+                txtNome.setText("");
+                txtSenha.setText("");
+
+
             }
         }
         
