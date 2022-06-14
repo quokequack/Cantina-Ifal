@@ -1,10 +1,10 @@
 public class Funcionario{
-    private int login;
+    private String login;
     private String username;
     private String senha;
 
 
-    public int getLogin(){
+    public String getLogin(){
         return this.login;
     }
     public String getUsername(){
@@ -13,7 +13,7 @@ public class Funcionario{
     public String getSenha(){
         return this.senha;
     }
-    public void setLogin(int login){
+    public void setLogin(String login){
         this.login = login;
     }
     public void setUsername(String username){
