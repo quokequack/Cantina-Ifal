@@ -24,3 +24,7 @@ Lidar com as condições excepcionais, lançando exceções quando necessário e
 Utilizar a Orientação a Objetos;
 Utilizar exceções para tratamento de erro;
 Utilizar coleções (ArrayList por exemplo).
+
+##Team
+Maria Luísa Alaquoke Ferreira dos Santos
+Guilherme Frias de Oliveira Tavares
