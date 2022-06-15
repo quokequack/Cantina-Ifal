@@ -152,5 +152,11 @@ public class ProdutoDAO {
             System.out.println("Não foi possível realizar a consulta. Erro: "+e);
         }
     }
+    public void ExcluirItem(int codprod) throws SQLException{
+        String delete = "delete from produto where codprod = ?";
+        PreparedStatement stmt = conexao.prepareStatement(delete);
+        stmt.setInt(1, codprod);
+        stmt.executeUpdate(delete);
+    }
     
 }

@@ -20,7 +20,7 @@ public class Main {
         MainGUI telaP = new MainGUI();
         int contador = 0;
         while (contador != 5){
-            System.out.println("\n === Cantina Do Ifal ===\nO que deseja fazer?\n1 - Cadastrar produtos;\n2 - Ver produtos em estoque;\n3 - Ver relatório de lucro e prejuízo;\n4 - Dar baixa no estoque\n5 - Registrar compra de um produto\n6 - Sair.");
+            System.out.println("\n === Cantina Do Ifal ===\nO que deseja fazer?\n1 - Cadastrar produtos;\n2 - Ver produtos em estoque;\n3 - Ver relatório de lucro e prejuízo;\n4 - Dar baixa no estoque\n5 - Registrar compra de um produto\n6 - Excluir item do estoque\n7 - Sair.");
             Scanner escolha = new Scanner(System.in);
             int opcaoEscolhida = escolha.nextInt();
             if(opcaoEscolhida == 1){
@@ -64,6 +64,8 @@ public class Main {
                     estoqueCantina.lucroProduto();
                 }else if(opcaoEscolhida3 == 2){
                     estoqueCantina.prejuizoProduto();
+                }else if(opcaoEscolhida == 4){
+                    
                 }
             }/*else if(opcaoEscolhida == 4){
                 System.out.println("Qual produto deseja dar baixa?");
@@ -107,6 +109,13 @@ public class Main {
                     proddao.atualizaQtdd(codigoP, qtddNova);
                 }
             }else if(opcaoEscolhida == 6){
+                System.out.println("Digite o código do item para excluir: ");
+                Scanner sc4 = new Scanner(System.in);
+                int codDelete = sc4.nextInt();
+                ProdutoDAO proddao = new ProdutoDAO();
+                proddao.ExcluirItem(codDelete);
+            }
+            else if(opcaoEscolhida == 7){
                 System.out.println("Até a próxima!");
                 break;
 

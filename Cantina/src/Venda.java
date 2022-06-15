@@ -1,7 +1,10 @@
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.util.List;
 
 public class Venda {
     private int codvenda;
+    private String codFunc;
     private Date dataVenda;
     private Double desconto;
     private Double totalVenda;
@@ -10,8 +13,11 @@ public class Venda {
     public int getCodvenda() {
         return codvenda;
     }
-    public void setCodvenda(int codvenda) {
-        this.codvenda = codvenda;
+    public String getCodFunc() {
+        return codFunc;
+    }
+    public void setCodFunc(String codFunc) {
+        this.codFunc = codFunc;
     }
     public Date getDataVenda() {
         return dataVenda;

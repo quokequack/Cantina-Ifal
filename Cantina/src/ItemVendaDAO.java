@@ -34,4 +34,11 @@ public class ItemVendaDAO {
             System.out.println("Não foi possível fazer a verificação. Erro: "+e);
         }
     }
+    public void AtualizaItemVendido(int codprod, int qtdd) throws SQLException{
+        String updateVenda2 = "update table produto set qtdddisponivel = qtdddisponivel - ? and qtddvendida = qtddvendida + ? where codprod = ?";
+        PreparedStatement stmt2 = conexao.prepareStatement(updateVenda2);
+        stmt2.setInt(1, qtdd);
+        stmt2.setInt(2, qtdd);
+        stmt2.setInt(3, codprod);
+    }
 }

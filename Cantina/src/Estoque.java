@@ -62,17 +62,38 @@ public class Estoque {
         ProdutoDAO prodDao = new ProdutoDAO();
         prodDao.prejuizoProd();
     }
-    public void fazerVenda(){
+    public void fazerVenda() throws SQLException{
         Venda venda = new Venda();
         VendaDAO vDao = new VendaDAO();
         ItemVenda item = new ItemVenda();
         ItemVendaDAO itemDAO = new ItemVendaDAO();
+        System.out.println("Insira o código do vendedor: ");
+        Scanner cV = new Scanner(System.in);
+        String codVendedor = cV.nextLine();
+        venda.setCodFunc(codVendedor);
         vDao.iniciaVenda(venda);
         System.out.println("Insira o código do produto que deseja vender: ");
         Scanner sc3 = new Scanner(System.in);
         int codp = sc3.nextInt();
         itemDAO.verificaBanco(codp);
-        item
+        System.out.println("Quer adicionar mais algum item?\n 1-Sim; 2-Não");
+        Scanner sc5 = new Scanner(System.in);
+        int opc = sc5.nextInt();
+        while(opc != 2){
+            System.out.println("Insira o código do produto que deseja vender: ");
+            Scanner sc4 = new Scanner(System.in);
+            int codprd = sc3.nextInt();
+            itemDAO.verificaBanco(codp);
+            ItemVendaDAO itemNovo = new ItemVendaDAO();
+            System.out.println("Insira a quantidade: ");
+            Scanner sc6 = new Scanner(System.in);
+            int qtdd = sc6.nextInt();
+            itemNovo.adicionaItemVenda(item);
+            Double totalVenda = item.getPreco();
+            venda.atualizaVenda(totalVenda, qtdd);
+            itemNovo.atualizaItemVendido();
+            
+        }
     }
 
 

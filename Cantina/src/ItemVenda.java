@@ -5,12 +5,12 @@ public class ItemVenda {
     private int qtdd;
     private Double preco;
 
-    public ItemVenda(int codvenda, int qtdd){
+        /*public ItemVenda(){
         this.idItem = idItem;
         this.codVenda = codvenda;
         this.qtdd = qtdd;
         this.preco = preco;
-    }
+    }*/
     public int getCodVenda() {
         return codVenda;
     }public int getIdItem() {
