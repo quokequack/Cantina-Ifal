@@ -1,10 +1,13 @@
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import javax.sound.midi.MidiEvent;
 
 public class Main {
-    public static void main(String args[]) throws PrecoInvalidoException, QuantidadeInvalidaException{
+    public static void main(String args[]) throws PrecoInvalidoException, QuantidadeInvalidaException, SQLException{
         //abre um novo estoque
+        DB bancoDeDados = new DB();
+        bancoDeDados.CriaTabelas();
         Estoque estoqueCantina = new Estoque();
         
         /*//produtos básicos do estoque
