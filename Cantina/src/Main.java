@@ -64,10 +64,11 @@ public class Main {
                     estoqueCantina.lucroProduto();
                 }else if(opcaoEscolhida3 == 2){
                     estoqueCantina.prejuizoProduto();
-                }else if(opcaoEscolhida == 4){
-                    
                 }
-            }/*else if(opcaoEscolhida == 4){
+            }else if(opcaoEscolhida == 4){ 
+                    estoqueCantina.fazerVenda();
+                }
+            /*else if(opcaoEscolhida == 4){
                 System.out.println("Qual produto deseja dar baixa?");
                 Scanner produtoBaixa = new Scanner(System.in);
                 String produtoParaBaixa = produtoBaixa.nextLine();
