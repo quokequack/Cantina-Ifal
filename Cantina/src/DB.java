@@ -45,9 +45,13 @@ public class DB {
             "CODVENDA INT(5),"+
             "QTDD INT(3),"+
             "PRECO DECIMAL(5,2),"+
-            "PRECOVENDA DECIMAL(5,2))";
+            "PRECOVENDA DECIMAL(5,2),"+
+            "FOREIGN KEY (CODPROD) REFERENCES PRODUTO(CODPROD),"+
+            "FOREIGN KEY (CODVENDA) REFERENCES VENDAS (CODVENDA),"+
+            "FOREIGN KEY (PRECOVENDA) REFERENCES PRODUTO (PRECOVENDA))";
         PreparedStatement stmt5 = conexao.prepareStatement(createItemVenda);
         stmt5.executeUpdate(createItemVenda);
+        /*
         String addRest1 = "ALTER TABLE ITEM_VENDA ADD CONSTRAINT FK_COD_PROD FOREIGN KEY (CODPROD) REFERENCES PRODUTO(CODPROD)";
         PreparedStatement stmt6 = conexao.prepareStatement(addRest1);
         stmt6.executeUpdate(addRest1);
@@ -56,7 +60,7 @@ public class DB {
         stmt7.executeUpdate(addRest2);
         String addRest3 = "ALTER TABLE ITEM_VENDA ADD CONSTRAINT FK_PRECO_VENDA FOREIGN KEY (PRECOVENDA) REFERENCES PRODUTO (PRECOVENDA)";
         PreparedStatement stmt8 = conexao.prepareStatement(addRest3);
-        stmt8.executeUpdate(addRest3);
+        stmt8.executeUpdate(addRest3);*/
 
     }
 }

@@ -1,6 +1,8 @@
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import javax.sound.midi.MidiEvent;
+
 public class Main {
     public static void main(String args[]) throws PrecoInvalidoException, QuantidadeInvalidaException, SQLException{
         //abre um novo estoque
@@ -62,11 +64,10 @@ public class Main {
                     estoqueCantina.lucroProduto();
                 }else if(opcaoEscolhida3 == 2){
                     estoqueCantina.prejuizoProduto();
+                }else if(opcaoEscolhida == 4){
+                    
                 }
-            }else if(opcaoEscolhida == 4){ 
-                    estoqueCantina.fazerVenda();
-                }
-            /*else if(opcaoEscolhida == 4){
+            }else if(opcaoEscolhida == 4){
                 System.out.println("Qual produto deseja dar baixa?");
                 Scanner produtoBaixa = new Scanner(System.in);
                 String produtoParaBaixa = produtoBaixa.nextLine();
@@ -75,7 +76,7 @@ public class Main {
                 int quantidadeBaixa = quantidade.nextInt();
                 estoqueCantina.darBaixa(quantidadeBaixa, produtoParaBaixa);
 
-            }*/else if(opcaoEscolhida == 5){
+            }else if(opcaoEscolhida == 5){
                 System.out.println("Você deseja atualizar:\n1-Nome;\n2-Preço;\n3-Quantidade comprada");
                 Scanner opt = new Scanner(System.in);
                 int opcao4 = opt.nextInt();
