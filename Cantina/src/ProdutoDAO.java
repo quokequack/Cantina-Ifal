@@ -159,4 +159,22 @@ public class ProdutoDAO {
         stmt.executeUpdate(delete);
     }
     
+    public void venda(String nome, int quantidade) {
+    	try {
+    		String sql = "update produto set QNTDDISPONIVEL = QTDDISPONIVEL - ? where NOMEPROD = ?";
+    		String update_qnt_venda = "update produto set QTDDVENDIDA = QTDVENDIDA + ? where NOMEPROD = ?";
+    		PreparedStatement stmt = conexao.prepareStatement(sql);
+            PreparedStatement stmt2 = conexao.prepareStatement(update_qnt_venda);
+            stmt.setInt(1, quantidade);
+            stmt.setString(2, nome);
+            stmt2.setInt(1, quantidade);
+            stmt2.setString(2,  nome);
+           
+            stmt.executeUpdate();
+            stmt2.executeUpdate();
+    	} catch(SQLException e) {
+    		throw new RuntimeException(e);
+    	}
+    }
+    
 }

@@ -1,5 +1,6 @@
 
 import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -95,6 +96,13 @@ public class Estoque {
             
         }
     }
+
+	public void darBaixa(int quantidadeBaixa, String produtoParaBaixa) {
+		ProdutoDAO venda = new ProdutoDAO();
+		venda.venda(produtoParaBaixa, quantidadeBaixa);
+		
+		
+	}
 
 
     //metodo para dar baixa em produto
