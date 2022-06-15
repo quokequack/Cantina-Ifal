@@ -13,10 +13,10 @@ class Produto{
     private int quantidadeVendida;
     private static int quantidadeDisponivel;
 
-    static ArrayList<Double> prejuizoProdutos = new ArrayList<>();
-    static ArrayList<Double> lucroProdutos = new ArrayList<>();
+    // ArrayList<Double> prejuizoProdutos = new ArrayList<>();
+    //static ArrayList<Double> lucroProdutos = new ArrayList<>();
 
-    public Produto(int codigo_produto, String nome, String descricao, double precoDeCompra, double precoDeVenda, int quantidadeComprada) throws PrecoInvalidoException, QuantidadeInvalidaException{
+    public Produto(int codigo_produto, String nome, String descricao, double precoDeCompra, double precoDeVenda, int quantidadeComprada, int qtddVendida) throws PrecoInvalidoException, QuantidadeInvalidaException{
         if (precoDeVenda <= precoDeCompra){
             throw new PrecoInvalidoException("Preço de venda não pode ser igual ou menor do que o preço de compra!!!");
         }else if(precoDeCompra == 0 || precoDeVenda == 0){
@@ -30,13 +30,10 @@ class Produto{
             this.precoDeCompra = precoDeCompra;
             this.precoDeVenda = precoDeVenda;
             this.quantidadeComprada = quantidadeComprada;
+            this.quantidadeVendida = qtddVendida;
             this.quantidadeDisponivel = quantidadeComprada;
-            Estoque.estoque.add(this);
-            if (quantidadeComprada <= 50){
-                Estoque.estoquePequeno.add(this);
             }
         }
-    }
     public int getCodigoProduto(){
         return this.codigo_produto;
     }
@@ -61,7 +58,7 @@ class Produto{
     public int getQuantidade(){
         return this.quantidadeDisponivel;
     }
-    public Integer getQuantidadeDisponivel(){
+    public int getQuantidadeDisponivel(){
         return this.quantidadeDisponivel;
     }
     public String getDescricao(){

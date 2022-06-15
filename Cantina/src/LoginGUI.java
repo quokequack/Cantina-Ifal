@@ -63,7 +63,7 @@ public class LoginGUI extends JFrame implements ActionListener {
         int login = Integer.parseInt(txtLogin.getText());
         String senha = txtSenha.getText();
         try{
-            String select = "select nome, login, senha from funcionario";
+            String select = "select nomefuncionario, login, senha from funcionario where nomefuncionario = ? and login = ? and senha = ?";
             FabricaCon fab = new FabricaCon();
             
             PreparedStatement stmt = fab.criaConexao().prepareStatement(select);
@@ -76,6 +76,7 @@ public class LoginGUI extends JFrame implements ActionListener {
             if(rs.next()){
                 dispose();
                 JOptionPane.showMessageDialog(null, "Você logou com sucesso!");
+                dispose();
             }
         }catch(SQLException err){
             System.out.println("Não foi possível fazer login. Erro: "+ err);

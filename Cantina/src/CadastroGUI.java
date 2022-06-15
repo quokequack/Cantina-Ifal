@@ -72,7 +72,7 @@ public class CadastroGUI extends JFrame implements ActionListener {
             txtNome.setText("");
             txtSenha.setText("");
         }else if (e.getActionCommand().equals("CANCELAR")){
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
         }else if(e.getActionCommand().equals("CADASTRAR")){
             Funcionario funcionarioNovo = new Funcionario();
             /*int login = Integer.parseInt(txtLogin.getText());*/
@@ -88,6 +88,7 @@ public class CadastroGUI extends JFrame implements ActionListener {
                 txtLogin.setText("");
                 txtNome.setText("");
                 txtSenha.setText("");
+                dispose();
             }
         }
         

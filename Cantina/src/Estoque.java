@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 
 public class Estoque {
     //static ArrayList<Produto> estoque = new ArrayList<>();
     //static ArrayList<Produto> estoquePequeno = new ArrayList<>();
-    double lucroProdutos;
-    double prejuizoProdutos;
+    //double lucroProdutos;
+    //double prejuizoProdutos;
 
-    public void cadastraProduto(int codigoProduto, String nome, String desc, double precoDeCompra, double precoDeVenda, int quantidadeComprada) throws PrecoInvalidoException, QuantidadeInvalidaException {
-        Produto produto = new Produto(codigoProduto, nome, desc, precoDeCompra, precoDeVenda, quantidadeComprada);
+    public void cadastraProduto(int codigoProduto, String nome, String desc, double precoDeCompra, double precoDeVenda, int quantidadeComprada, int qtddVendida) throws PrecoInvalidoException, QuantidadeInvalidaException {
+        Produto produto = new Produto(codigoProduto, nome, desc, precoDeCompra, precoDeVenda, quantidadeComprada, qtddVendida);
         //estoque.add(produto);
         try{
             ProdutoDAO prodDAO = new ProdutoDAO();
@@ -34,8 +35,8 @@ public class Estoque {
     }
     //exibe os produtos por nome e descricao
     public void produtosPorDescricao(){
-        /*System.out.println("=== PRODUTOS POR DESCRIÇÃO ===");
-        for(Produto produto: estoque){
+        System.out.println("=== PRODUTOS POR DESCRIÇÃO ===");
+        /*for(Produto produto: estoque){
             System.out.println(produto.getNome());
             System.out.println(produto.getDescricao());
         }*/
@@ -51,8 +52,32 @@ public class Estoque {
         ProdutoDAO prodDao = new ProdutoDAO();
         prodDao.estoquePeq();
     }
+    //exibe o lucro dos produtos
+    public void lucroProduto(){
+        ProdutoDAO prodDao = new ProdutoDAO();
+        prodDao.lucroProd();
+    }
+    //exibe o prejuizo dos produtos
+    public void prejuizoProduto(){
+        ProdutoDAO prodDao = new ProdutoDAO();
+        prodDao.prejuizoProd();
+    }
+    public void fazerVenda(){
+        Venda venda = new Venda();
+        VendaDAO vDao = new VendaDAO();
+        ItemVenda item = new ItemVenda();
+        ItemVendaDAO itemDAO = new ItemVendaDAO();
+        vDao.iniciaVenda(venda);
+        System.out.println("Insira o código do produto que deseja vender: ");
+        Scanner sc3 = new Scanner(System.in);
+        int codp = sc3.nextInt();
+        itemDAO.verificaBanco(codp);
+        item
+    }
+
+
     //metodo para dar baixa em produto
-    public void darBaixa(int quantidadeVendida, String nomeProduto) throws QuantidadeInvalidaException{
+    //public void darBaixa(int quantidadeVendida, String nomeProduto) throws QuantidadeInvalidaException{
         /*for(Produto produto: estoque){
             if(produto.getNome() == nomeProduto){
                 int quantidadeDisponivelNoProduto = produto.getQuantidadeDisponivel();
@@ -75,7 +100,7 @@ public class Estoque {
             }
         }*/
     }
-     //método que calcula o lucro ou prejuízo por produto vendido
+     /*//método que calcula o lucro ou prejuízo por produto vendido
      public void calculaLucroEPrejuizo(Produto produto){
          double precoDeVendaDoProduto = produto.getPrecoDeVenda();
          double quantidadeCompradaProduto = produto.getQuantidadeComprada();
@@ -87,5 +112,5 @@ public class Estoque {
         }else{
             lucroProdutos += lucro;
         }
-    }
-}
+    }*/
+
