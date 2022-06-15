@@ -107,10 +107,7 @@ public class ProdutoDAO {
             System.out.println("Não foi possível realizar a consulta. Erro: "+e);
         }
     }
-    public void mudaPrecoCompra(int codprod){
-        String updateCompra = "update produto set precocompra = ?";
-        PreparedStatement stmt5
-        //método que faz uma pesquisa no banco de dados e retorna os produtos com estoque pequeno
+    //método que faz uma pesquisa no banco de dados e retorna os produtos com estoque pequeno
     public void estoquePeq(){
         try{
             String selectQtddMin = "select nomeprod, qtdddisponivel from produto where qtdddisponivel <= 50 order by qtdddisponivel";
