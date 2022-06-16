@@ -11,6 +11,7 @@ public class ItemVendaDAO {
     public ItemVendaDAO(){
         this.conexao = new FabricaCon().criaConexao();
     }
+    //ADICIONA NA TABELA ITEMVENDA
     public void adicionaItemVenda(ItemVenda itemVenda) throws SQLException{
         String insertItem = "insert into item_venda (iditem, codprod, codvenda, qtdd, preco)"+"values(?,?,?,?,?)";
         PreparedStatement stmt = conexao.prepareStatement(insertItem);
@@ -21,7 +22,7 @@ public class ItemVendaDAO {
         stmt.setDouble(5, itemVenda.getPreco());
         stmt.execute();
     }
-    //metodo verifica se tem no banco
+    //metodo verifica se o produto tem no banco
     public void verificaBanco(int codprod) throws SQLException{
         try{
             String select = "select nomeprod from produto where codprod = ? and qtdddisponivel > 0";
@@ -36,6 +37,7 @@ public class ItemVendaDAO {
             System.out.println("Não foi possível fazer a verificação. Erro: "+e);
         }
     }
+    //ATUALIZA A QUANTIDADE DE ITEM VENDIDO
     public void AtualizaItemVendido(int codprod, int qtdd) throws SQLException{
         String updateVenda2 = "update table produto set qtdddisponivel = qtdddisponivel - ? and qtddvendida = qtddvendida + ? where codprod = ?";
         PreparedStatement stmt2 = conexao.prepareStatement(updateVenda2);
@@ -43,6 +45,7 @@ public class ItemVendaDAO {
         stmt2.setInt(2, qtdd);
         stmt2.setInt(3, codprod);
     }
+    //PESQUISA O PRECO DO ITEM NA TABELA ITEM
     public Double pesquisaPrecoProd(int codprod){
         try{
             String select = "select preco from item_venda where codprod = ?";
@@ -59,6 +62,7 @@ public class ItemVendaDAO {
             throw new RuntimeException("Não foi possível realizar consulta. Erro: "+e);
         }
     }
+    //FAZ UMA PESQUISA DO ITEM QUE ESTÁ NA VENDA E MULTIPLICA GERANDO O TOTAL DA VENDA, QUE É ARMAZENADO EM UMA VARIÁVEL PARA POSTERIORMENTE SER ASSOCIADO AO TOTAL DA VENDA NA TABELA VENDAS
     public Double totalVenda(int codvenda){
         try{
             String update = "select preco, qtdd from item_venda where codvenda = ?";
@@ -76,6 +80,7 @@ public class ItemVendaDAO {
         }
         
     }
+    //GUARDA O NOME DE TODOS OS ITENS QUE ESTÃO EM UMA VENDA
     public String itensVenda(int codvenda){
         try{
             String select = "select p.nomeprod from produto p, item_venda i where i.codvenda = p.codvenda and p.codvenda = ?";

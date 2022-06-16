@@ -10,6 +10,7 @@ public class VendaDAO {
     public VendaDAO(){
         this.conexao = new FabricaCon().criaConexao();
     }
+    //INICIALIZA A VENDA
     public void iniciaVenda(Venda venda) throws SQLException{
         String insertVenda = "insert into vendas (datavenda, desconto, formapagamento, login)"+"values(?,?,?,?)";
         PreparedStatement stmt = conexao.prepareStatement(insertVenda);
@@ -21,6 +22,7 @@ public class VendaDAO {
         stmt.setString(4, venda.getCodFunc());
         stmt.execute();
     }
+    //ATUALIZA O VALOR TOTAL DA VENDA NA TABELA VENDAS
     public void atualizaVenda(int codvenda, Double totalVenda) throws SQLException{
         String updateVenda = "update table vendas set totalvenda = ?  where codvenda = ?";
         PreparedStatement stmt = conexao.prepareStatement(updateVenda);
@@ -29,6 +31,7 @@ public class VendaDAO {
         stmt.executeUpdate();
 
     }
+    //SELECIONA O CODIGO DE VENDA, QUE É AUTO INCREMENT
     public int selecionaVenda(int codprod){
         try{
             String selectVenda = "SELECT V.CODVENDA FROM ITEM_VENDA I, VENDAS V, PRODUTOS P WHERE I.CODPROD = P.CODPROD AND P.CODPROD = ?";

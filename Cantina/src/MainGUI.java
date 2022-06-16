@@ -37,6 +37,7 @@ public class MainGUI extends JFrame implements ActionListener {
         login.addActionListener(this);
         cadastro.addActionListener(this);
     }
+    //TRATAMENTO DE EVENTO
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("LOGIN")){
@@ -51,6 +52,7 @@ public class MainGUI extends JFrame implements ActionListener {
             this.dispose();
         }
     }
+    //INICIALIZA O PROGRAMA
     public static void main(String args[]) throws SQLException{
         MainGUI telaP = new MainGUI();
     }

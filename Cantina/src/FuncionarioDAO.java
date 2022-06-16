@@ -12,20 +12,7 @@ public class FuncionarioDAO {
         this.conexao = conexao.criaConexao(); */
         conexao = FabricaCon.criaConexao();
     }
-
-    String sql2 = "select login from funcionario where login=?";
-        
-
-    public boolean validaLogin(String login) throws SQLException{
-        try(
-            PreparedStatement stmt2 = conexao.prepareStatement(sql2);
-        ){
-            stmt2.setString(1, login);
-            try (ResultSet resultado = stmt2.executeQuery()){
-                return resultado.next();
-            }
-        }
-    }
+    //ADICIONA O FUNCIONARIO NO BANCO
     public void adiciona(Funcionario funcionario){
         try{
             String sql = "insert into funcionario(login, nome, senha)"+"values(?,?,?)";

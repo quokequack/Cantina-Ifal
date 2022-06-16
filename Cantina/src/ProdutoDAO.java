@@ -113,6 +113,7 @@ public class ProdutoDAO {
             System.out.println("Não foi possível realizar a consulta. Erro: "+e);
         }
     }
+    //CALCULA O LUCRO DOS PRODUTOS EM ESTOQUE
     public void lucroProd(){
         try{
             String selectLuc = "select nomeprod, ((qtddvendida * precovenda) - (qtddcomprada * precocompra)) from produto where (qtddvendida * precovenda - qtddcomprada * precocompra) > 0";
@@ -128,6 +129,7 @@ public class ProdutoDAO {
             System.out.println("Não foi possível realizar a consulta. Erro: "+e);
         }
     }
+    //CALCULA PREJUIZO DOS PRODUTOS EM ESTOQUE
     public void prejuizoProd(){
         try{
             String selectPrej = "select nomeprod, ((qtddvendida * precovenda) - (qtddcomprada * precocompra)) from produto where (qtddvendida * precovenda - qtddcomprada * precocompra) < 0";
@@ -142,6 +144,7 @@ public class ProdutoDAO {
             System.out.println("Não foi possível realizar a consulta. Erro: "+e);
         }
     }
+    //EXCLUI ITEM DO ESTOQUE
     public void ExcluirItem(int codprod) throws SQLException{
         String delete = "DELETE FROM PRODUTO WHERE CODPROD = ?";
         PreparedStatement stmt = conexao.prepareStatement(delete);

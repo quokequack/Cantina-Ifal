@@ -2,12 +2,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+
+
 public class DB {
     private Connection conexao;
 
     public DB(){
         this.conexao = FabricaCon.criaConexao();
     }
+    //CRIA AS TABELAS NO BANCO DE DADOS
     public void CriaTabelas() throws SQLException{
         String createProduto = "CREATE TABLE IF NOT EXISTS PRODUTO"+
             "(CODPROD INT(3) PRIMARY KEY,"+
@@ -57,16 +60,5 @@ public class DB {
         stmt6.setString(2, "ADM");
         stmt6.setString(3, "123");
         stmt6.execute();
-        /*
-        String addRest1 = "ALTER TABLE ITEM_VENDA ADD CONSTRAINT FK_COD_PROD FOREIGN KEY (CODPROD) REFERENCES PRODUTO(CODPROD)";
-        PreparedStatement stmt6 = conexao.prepareStatement(addRest1);
-        stmt6.executeUpdate(addRest1);
-        String addRest2 = "ALTER TABLE ITEM_VENDA ADD CONSTRAINT FK _CODVENDA FOREIGN KEY (CODVENDA) REFERENCES VENDA (CODVENDA)";
-        PreparedStatement stmt7 = conexao.prepareStatement(addRest2);
-        stmt7.executeUpdate(addRest2);
-        String addRest3 = "ALTER TABLE ITEM_VENDA ADD CONSTRAINT FK_PRECO_VENDA FOREIGN KEY (PRECOVENDA) REFERENCES PRODUTO (PRECOVENDA)";
-        PreparedStatement stmt8 = conexao.prepareStatement(addRest3);
-        stmt8.executeUpdate(addRest3);*/
-
     }
 }

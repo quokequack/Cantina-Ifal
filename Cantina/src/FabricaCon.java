@@ -1,7 +1,7 @@
 import java.sql.*;
 
 public class FabricaCon {
-    
+    //ABRE UMA NOVA CONEXÃO COM O BANCO
     public static Connection criaConexao(){
         try{
             return DriverManager.getConnection("jdbc:mysql://localhost/cantinaif","root","");
