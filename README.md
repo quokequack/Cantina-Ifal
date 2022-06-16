@@ -4,6 +4,10 @@ Projeto 3o bimestre - Cantina do Ifal
 3. Depois disso, pode-se inicializar o arquivo MainGUI.java e usar o programa tranquilamente;
 4. Há um registro default para fazer login sem que seja necessário cadastrar um funcionário no banco. Para acessar com o login do gerente, use: LOGIN = 001; NOME = ADM; SENHA = 123;
 
+Dificuldades: Lógica na criação do método para realizar a venda;
+
+Não está funcionando: Método para vender e método para excluir produtos;
+
 Equipe:
 Maria Luísa Alaquoke Ferreira dos Santos
 Guilherme Frias de Oliveira Tavares
