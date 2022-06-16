@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.PreparedStatement;
@@ -18,7 +19,9 @@ public class LoginGUI extends JFrame implements ActionListener {
     private JLabel lblText;
     private JLabel lblText2;
 
-    public LoginGUI(){
+    public LoginGUI() throws SQLException{
+        DB cantina = new DB();
+        cantina.CriaTabelas();
         setSize(400,00);
         setTitle("Cantina IFAL -Login de funcionarios");
         lblText = new JLabel("LOGIN DE FUNCIONARIOS");
@@ -54,8 +57,8 @@ public class LoginGUI extends JFrame implements ActionListener {
         container.add(login);
         login.addActionListener(this);
     }
-    public static void main(String args[]){
-        LoginGUI telaLogin = new LoginGUI();
+    public static void main(String args[]) throws SQLException{
+        LoginGUI telaL = new LoginGUI();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -63,20 +66,23 @@ public class LoginGUI extends JFrame implements ActionListener {
         int login = Integer.parseInt(txtLogin.getText());
         String senha = txtSenha.getText();
         try{
-            String select = "select nomefuncionario, login, senha from funcionario where nomefuncionario = ? and login = ? and senha = ?";
+            String select = "select nome, login, senha from funcionario where nome = ? and login = ? and senha = ?";
             FabricaCon fab = new FabricaCon();
-            
             PreparedStatement stmt = fab.criaConexao().prepareStatement(select);
             stmt.setString(1, username);
             stmt.setInt(2, login);
             stmt.setString(3, senha);
-
             ResultSet rs = stmt.executeQuery();
-
             if(rs.next()){
-                dispose();
                 JOptionPane.showMessageDialog(null, "Você logou com sucesso!");
+                Main telaPrincipal = new Main();
                 dispose();
+                try {
+                    telaPrincipal.cantina();
+                } catch (PrecoInvalidoException | QuantidadeInvalidaException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
         }catch(SQLException err){
             System.out.println("Não foi possível fazer login. Erro: "+ err);

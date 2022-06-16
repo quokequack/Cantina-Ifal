@@ -28,7 +28,7 @@ public class FuncionarioDAO {
     }
     public void adiciona(Funcionario funcionario){
         try{
-            String sql = "insert into funcionario(login, nomefuncionario, senha)"+"values(?,?,?)";
+            String sql = "insert into funcionario(login, nome, senha)"+"values(?,?,?)";
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, funcionario.getLogin());
             stmt.setString(2, funcionario.getUsername());

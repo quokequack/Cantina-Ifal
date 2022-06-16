@@ -13,12 +13,24 @@ public class ItemVenda {
     }*/
     public int getCodVenda() {
         return codVenda;
-    }public int getIdItem() {
+
+    }
+    public void setCodVenda(int codVenda) {
+        this.codVenda = codVenda;
+    }
+    public int getIdItem() {
         return idItem;
     }public Double getPreco() {
         return preco;
-    }public int getQtdd() {
+    }
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+    public int getQtdd() {
         return qtdd;
+    }
+    public void setQtdd(int qtdd) {
+        this.qtdd = qtdd;
     }
     public int getCodproduto() {
         return codproduto;

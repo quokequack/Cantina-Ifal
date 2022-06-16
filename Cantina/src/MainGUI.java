@@ -1,7 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.event.*;
+
 import java.awt.event.*;
+import java.sql.SQLException;
 
 
 public class MainGUI extends JFrame implements ActionListener {
@@ -11,7 +13,9 @@ public class MainGUI extends JFrame implements ActionListener {
     private JButton login;
     private JButton cadastro;
 
-    public MainGUI(){
+    public MainGUI() throws SQLException{
+        DB database = new DB();
+        database.CriaTabelas();
         setSize(400,200);
         setTitle("CANTINA DO IFAL");
         container = getContentPane();
@@ -36,12 +40,18 @@ public class MainGUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("LOGIN")){
-            LoginGUI loginP = new LoginGUI();
+            try {
+                LoginGUI loginP = new LoginGUI();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
             this.dispose();
         }else{
             CadastroGUI cadastroP = new CadastroGUI();
             this.dispose();
         }
-        
+    }
+    public static void main(String args[]) throws SQLException{
+        MainGUI telaP = new MainGUI();
     }
 }

@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.Container;
 import java.awt.event.*;
+import java.lang.invoke.StringConcatFactory;
 import java.sql.*;
 
 public class CadastroGUI extends JFrame implements ActionListener {
@@ -62,9 +63,6 @@ public class CadastroGUI extends JFrame implements ActionListener {
         limparTudo.addActionListener(this);
         cancelar.addActionListener(this);
     }
-    public static void main(String args[]){
-        CadastroGUI cadastroTeste = new CadastroGUI();
-    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("LIMPAR")){
@@ -79,19 +77,54 @@ public class CadastroGUI extends JFrame implements ActionListener {
             funcionarioNovo.setLogin(txtLogin.getText());
             funcionarioNovo.setUsername(txtNome.getText());
             funcionarioNovo.setSenha(txtSenha.getText());
-            if ((txtLogin.getText().isEmpty()) || (txtNome.getText().isEmpty()) || (txtSenha.getText().isEmpty())){
-                JOptionPane.showMessageDialog(null, "Preencha os campos!!");
-            }else{
-                FuncionarioDAO fdao = new FuncionarioDAO();
-                fdao.adiciona(funcionarioNovo);
-                JOptionPane.showMessageDialog(null, "Funcionário "+txtNome.getText()+" inserido com sucesso!");
-                txtLogin.setText("");
-                txtNome.setText("");
-                txtSenha.setText("");
+            boolean verificacao = verificaBancoFunc(txtLogin.getText(), txtNome.getText(), txtSenha.getText());
+            if(verificacao = false){
+                System.out.println("Funcionário já existe!");
                 dispose();
+            }else{
+                if ((txtLogin.getText().isEmpty()) || (txtNome.getText().isEmpty()) || (txtSenha.getText().isEmpty())){
+                    JOptionPane.showMessageDialog(null, "Preencha os campos!!");
+                }else{
+                    FuncionarioDAO fdao = new FuncionarioDAO();
+                    fdao.adiciona(funcionarioNovo);
+                    JOptionPane.showMessageDialog(null, "Funcionário "+txtNome.getText()+" inserido com sucesso!");
+                    txtLogin.setText("");
+                    txtNome.setText("");
+                    txtSenha.setText("");
+                    Main telaPrincipal = new Main();
+                    try {
+                        telaPrincipal.cantina();
+                    } catch (PrecoInvalidoException | QuantidadeInvalidaException | SQLException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                    dispose();
+                }
             }
         }
-        
     }
-
+    public boolean verificaBancoFunc(String login, String nome, String senha){
+        try{
+            FabricaCon fabCon = new FabricaCon();
+            Connection conexao = fabCon.criaConexao();
+            String selectFunc = "select login, nome, senha from funcionario where login = ? and nome = ? and senha = ?";
+            PreparedStatement stmt = conexao.prepareStatement(selectFunc);
+            stmt.setString(1, login);
+            stmt.setString(2, nome);
+            stmt.setString(3, senha);
+            ResultSet resultado = stmt.executeQuery();
+            boolean result = false;
+            if(resultado.next()){
+                JOptionPane.showMessageDialog(null, "Usuário já cadastrado. Tente novamente!");
+                dispose();
+                result = true;
+            }
+            return result;
+        }catch(SQLException e){
+            throw new RuntimeException("ERRO: ");
+        }
+    }
 }
+        
+
+

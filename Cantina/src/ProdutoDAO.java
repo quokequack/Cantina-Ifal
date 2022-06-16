@@ -64,16 +64,6 @@ public class ProdutoDAO {
     }catch(SQLException e){
         System.out.println("Não foi possível atualizar os dados da tabela. Erro: "+e);
     }
-        /*contador = 0;
-        while (contador > 5){
-            scanner('voce quer adicionar algum item a venda? ')
-            if (sim){
-                qual item?
-                metodo que adiciona o item a venda
-            if (nao){
-                finaliza a venda e printa o total e a forma de pagamento
-            }
-            }*/
         };
     //método que faz uma consulta no banco de dados e retorna os produtos ordenados pelo estoque
     public void prodPorQtdd(){
@@ -157,24 +147,6 @@ public class ProdutoDAO {
         PreparedStatement stmt = conexao.prepareStatement(delete);
         stmt.setInt(1, codprod);
         stmt.execute(delete);
-    }
-    
-    public void venda(String nome, int quantidade) {
-    	try {
-    		String sql = "update produto set QNTDDISPONIVEL = QTDDISPONIVEL - ? where NOMEPROD = ?";
-    		String update_qnt_venda = "update produto set QTDDVENDIDA = QTDVENDIDA + ? where NOMEPROD = ?";
-    		PreparedStatement stmt = conexao.prepareStatement(sql);
-            PreparedStatement stmt2 = conexao.prepareStatement(update_qnt_venda);
-            stmt.setInt(1, quantidade);
-            stmt.setString(2, nome);
-            stmt2.setInt(1, quantidade);
-            stmt2.setString(2, nome);
-           
-            stmt.executeUpdate();
-            stmt2.executeUpdate();
-    	} catch(SQLException e) {
-    		throw new RuntimeException(e);
-    	}
     }
     
 }

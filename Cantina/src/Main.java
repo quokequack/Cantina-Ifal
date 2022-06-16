@@ -1,25 +1,14 @@
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import javax.sound.midi.MidiEvent;
-
 public class Main {
-    public static void main(String args[]) throws PrecoInvalidoException, QuantidadeInvalidaException, SQLException{
-        //abre um novo estoque
-        DB bancoDeDados = new DB();
-        bancoDeDados.CriaTabelas();
+    public void cantina() throws PrecoInvalidoException, QuantidadeInvalidaException, SQLException{
+        //DB database = new DB();
+        //database.CriaTabelas();
+        //MainGUI telaPrincipal = new MainGUI();
         Estoque estoqueCantina = new Estoque();
-        
-        /*//produtos básicos do estoque
-        Produto suco = new Produto(001,"Suco de Laranja", "500Ml", 2.82, 6.00,200);
-        Produto pipoca = new Produto(002,"Pipoca Cheetos", "Sabor: queijo", 1.00, 2.00, 500);
-        Produto cha = new Produto(003,"Chá Gelado", "Sabor: Limão", 2.30, 5.00, 150);
-        Produto torta = new Produto(004,"Torta", "Salgada", 3.00, 6.00, 4);
-        Produto refrigerante = new Produto(005,"Refrigerante", "Guaraná 100Ml", 1.80, 3.50, 100);
-        //menu da cantina*/
-        MainGUI telaP = new MainGUI();
         int contador = 0;
-        while (contador != 5){
+        while (contador != 7){
             System.out.println("\n === Cantina Do Ifal ===\nO que deseja fazer?\n1 - Cadastrar produtos;\n2 - Ver produtos em estoque;\n3 - Ver relatório de lucro e prejuízo;\n4 - Dar baixa no estoque\n5 - Registrar compra de um produto\n6 - Excluir item do estoque\n7 - Sair.");
             Scanner escolha = new Scanner(System.in);
             int opcaoEscolhida = escolha.nextInt();
@@ -64,18 +53,9 @@ public class Main {
                     estoqueCantina.lucroProduto();
                 }else if(opcaoEscolhida3 == 2){
                     estoqueCantina.prejuizoProduto();
-                }else if(opcaoEscolhida == 4){
-                    
                 }
             }else if(opcaoEscolhida == 4){
-                System.out.println("Qual produto deseja dar baixa?");
-                Scanner produtoBaixa = new Scanner(System.in);
-                String produtoParaBaixa = produtoBaixa.nextLine();
-                System.out.println("Quantos você quer dar baixa? ");
-                Scanner quantidade = new Scanner(System.in);
-                int quantidadeBaixa = quantidade.nextInt();
-                estoqueCantina.darBaixa(quantidadeBaixa, produtoParaBaixa);
-
+                estoqueCantina.fazerVenda();
             }else if(opcaoEscolhida == 5){
                 System.out.println("Você deseja atualizar:\n1-Nome;\n2-Preço;\n3-Quantidade comprada");
                 Scanner opt = new Scanner(System.in);
